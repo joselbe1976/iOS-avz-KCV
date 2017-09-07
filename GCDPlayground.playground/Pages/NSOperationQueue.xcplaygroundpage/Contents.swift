@@ -26,11 +26,32 @@ class MyOp: Operation {
     
     override func main() {
         dp("Inside operation downloading " + self.url)
+        
+        // self.performSelector(onMainThread: #selector(MyOp.executeThisOnMain), with: nil, waitUntilDone: false)
+        executeThisOnMain()
+    }
+    
+    //@objc
+    func executeThisOnMain() {
+        OperationQueue.main.addOperation {
+            dp(" Back to main")
+        }
     }
 }
 
-let op1 = MyOp(url: "http///khkd")
-let op2 = MyOp(url: "lkjljl")
-let op3 = MyOp(url: "jlkjlj")
+extension Operation {
+    func addDependenciesSoCool(op: Operation) -> Operation {
+        self.addDependency(op)
+        return self
+    }
+}
+
+let op1 = MyOp(url: "http///khkd - 1")
+let op2 = MyOp(url: "lkjljl - 2")
+let op3 = MyOp(url: "jlkjlj - 3")
+
+op2.addDependenciesSoCool(op: op1).addDependenciesSoCool(op: op3)
+
 
 queue.addOperations([op1, op2, op3], waitUntilFinished: false)
+
