@@ -9,7 +9,7 @@
 import XCTest
 import MadridShops
 
-class ShopsTests: XCTest {
+class ShopsTests: XCTestCase {
     
     func testGivenEmptyShopsNumberShopsIsZero() {
         let sut = Shops()
@@ -21,6 +21,4 @@ class ShopsTests: XCTest {
         sut.add(shop: Shop(name: "Shop"))
         XCTAssertEqual(1, sut.count())
     }
-    
-    
 }
