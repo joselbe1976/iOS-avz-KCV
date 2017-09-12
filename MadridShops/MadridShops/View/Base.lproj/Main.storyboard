@@ -70,17 +70,17 @@
                                 <rect key="frame" x="0.0" y="365.5" width="375" height="301.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="XTF-TS-reE">
-                                    <size key="itemSize" width="240" height="55"/>
+                                    <size key="itemSize" width="310" height="55"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ShopCell" id="Wu7-WL-dIb" customClass="ShopCell" customModule="MadridShops" customModuleProvider="target">
-                                        <rect key="frame" x="67.5" y="0.0" width="240" height="55"/>
+                                        <rect key="frame" x="32.5" y="0.0" width="310" height="55"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="240" height="55"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="310" height="55"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nia-vK-JiG">
@@ -124,11 +124,47 @@
                     <navigationItem key="navigationItem" title="Shops" largeTitleDisplayMode="always" id="kFm-6E-Ysl"/>
                     <connections>
                         <outlet property="shopsCollectionView" destination="Zb2-mG-Fdh" id="LMY-Uy-YHN"/>
+                        <segue destination="Prr-ig-DwL" kind="show" identifier="ShowShopDetailSegue" id="juq-FY-QBf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-150" y="166"/>
+            <point key="canvasLocation" x="-151.19999999999999" y="165.06746626686657"/>
+        </scene>
+        <!--Shop Detail View Controller-->
+        <scene sceneID="jxp-RK-GAN">
+            <objects>
+                <viewController id="Prr-ig-DwL" customClass="ShopDetailViewController" customModule="MadridShops" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Sdl-ca-4d0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hEd-MM-Nbl">
+                                <rect key="frame" x="16" y="91" width="343" height="293"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <mutableString key="text">Lorem fistrum al ataquerl a gramenawer ahorarr. Benemeritaar apetecan diodeno de la pradera pecador amatomaa ese que llega está la cosa muy malar. Sexuarl fistro a peich de la pradera pecador jarl quietooor la caidita va usté muy cargadoo condemor qué dise usteer. Te voy a borrar el cerito torpedo ese que llega ese pedazo de ese hombree. Qué dise usteer benemeritaar pecador al ataquerl no puedor tiene musho peligro a gramenawer la caidita la caidita te va a hasé pupitaa. La caidita a wan está la cosa muy malar hasta luego Lucas tiene musho peligro al ataquerl mamaar ahorarr. De la pradera pupita pecador condemor tiene musho peligro se calle ustée. Fistro a wan condemor va usté muy cargadoo diodenoo mamaar. Pecador me cago en tus muelas fistro diodeno diodenoo te va a hasé pupitaa al ataquerl sexuarl ese hombree diodenoo por la gloria de mi madre.
+
+Quietooor hasta luego Lucas apetecan benemeritaar se calle ustée hasta luego Lucas llevame al sircoo. Tiene musho peligro diodenoo por la gloria de mi madre a peich no puedor a gramenawer a gramenawer ese pedazo de mamaar. Jarl mamaar amatomaa te va a hasé pupitaa la caidita te voy a borrar el cerito torpedo. Por la gloria de mi madre a </mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hAX-FV-zB1">
+                                <rect key="frame" x="16" y="392" width="343" height="242"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="Q7y-aZ-CVJ"/>
+                    </view>
+                    <connections>
+                        <outlet property="shopDetailDescription" destination="hEd-MM-Nbl" id="zNX-fb-Lrw"/>
+                        <outlet property="shopImage" destination="hAX-FV-zB1" id="g2G-sq-0ig"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="puQ-WC-Feb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="688.79999999999995" y="165.06746626686657"/>
         </scene>
     </scenes>
 </document>
