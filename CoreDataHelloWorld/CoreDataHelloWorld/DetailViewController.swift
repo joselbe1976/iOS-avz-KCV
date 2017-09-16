@@ -12,7 +12,13 @@ class DetailViewController: UIViewController {
 
     @IBOutlet weak var detailDescriptionLabel: UILabel!
 
-
+    var detailItem: Event? {
+        didSet {
+            // Update the view.
+            configureView()
+        }
+    }
+    
     func configureView() {
         // Update the user interface for the detail item.
         if let detail = detailItem {
@@ -28,17 +34,22 @@ class DetailViewController: UIViewController {
         configureView()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    var detailItem: Event? {
-        didSet {
-            // Update the view.
-            configureView()
+    
+    
+    @IBAction func deleteEvent(_ sender: Any) {
+        let context = detailItem?.managedObjectContext
+        context?.delete(detailItem!)
+        do {
+            try context?.save()
+        } catch {
+            
         }
+        
+        // self.navigationController?.popViewController(animated: true)
     }
+    
+    
+    
 
 
 }

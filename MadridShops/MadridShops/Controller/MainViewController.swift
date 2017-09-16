@@ -8,9 +8,11 @@
 
 import UIKit
 import FillableLoaders
+import CoreData
 
 class MainViewController: UIViewController {
 
+    var context: NSManagedObjectContext!
     @IBOutlet weak var redRectangle: UIView!
     var myLoader: WavesLoader?
     
@@ -87,5 +89,13 @@ class MainViewController: UIViewController {
         }
     
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowShopsSegue" {
+            let vc = segue.destination as! ViewController
+            vc.context = self.context
+        }
+    }
+    
 
 }

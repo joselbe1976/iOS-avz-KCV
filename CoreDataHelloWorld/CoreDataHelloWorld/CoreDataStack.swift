@@ -8,25 +8,20 @@
 
 import CoreData
 
-// MARK: - Core Data stack
-class CoreDataStack {
-    
-    lazy var persistentContainer: NSPersistentContainer = createContainer()
-        
-    func createContainer() -> NSPersistentContainer {
-        let container = NSPersistentContainer(name: "CoreDataHelloWorld")
+public class CoreDataStack {
+    public func createContainer(dbName: String) -> NSPersistentContainer {
+        let container = NSPersistentContainer(name: dbName)
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            print("💾 \( storeDescription.description )")
+            //  ¯\_(ツ)_/¯
             if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
+                fatalError("💩 Unresolved error \(error), \(error.userInfo)")
             }
         })
         return container
     }
     
-    // MARK: - Core Data Saving support
-    
-    func saveContext () {
-        let context = persistentContainer.viewContext
+    public func saveContext(context: NSManagedObjectContext) {
         if context.hasChanges {
             do {
                 try context.save()

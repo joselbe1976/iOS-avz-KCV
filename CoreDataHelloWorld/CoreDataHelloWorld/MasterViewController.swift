@@ -33,18 +33,17 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         super.viewWillAppear(animated)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
     @objc
     func insertNewObject(_ sender: Any) {
-        let context = self.fetchedResultsController.managedObjectContext
+        guard let context = self.managedObjectContext else { return }
+        
         let newEvent = Event(context: context)
-             
         // If appropriate, configure the new managed object.
         newEvent.timestamp = Date()
+        
+        let shop = Shop(context: context)
+        shop.name = "Moooooo"
 
         // Save the context.
         do {
@@ -96,11 +95,10 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let context = fetchedResultsController.managedObjectContext
-            context.delete(fetchedResultsController.object(at: indexPath))
+            self.managedObjectContext?.delete(fetchedResultsController.object(at: indexPath))
                 
             do {
-                try context.save()
+                try self.managedObjectContext?.save()
             } catch {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -117,7 +115,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     // MARK: - Fetched results controller
 
     var fetchedResultsController: NSFetchedResultsController<Event> {
-        if _fetchedResultsController != nil {
+        if (_fetchedResultsController != nil) {
             return _fetchedResultsController!
         }
         
@@ -126,13 +124,11 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         // Set the batch size to a suitable number.
         fetchRequest.fetchBatchSize = 20
         
-        // Edit the sort key as appropriate.
-        let sortDescriptor = NSSortDescriptor(key: "timestamp", ascending: false)
-        
-        fetchRequest.sortDescriptors = [sortDescriptor]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
+        // fetchRequest == SELECT * FROM EVENT ORDER BY TIMESTAMP DESC
         let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
         aFetchedResultsController.delegate = self
         _fetchedResultsController = aFetchedResultsController
@@ -182,15 +178,6 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
     }
-
-    /*
-     // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.
-     
-     func controllerDidChangeContent(controller: NSFetchedResultsController) {
-         // In the simplest, most efficient, case, reload the table view.
-         tableView.reloadData()
-     }
-     */
 
 }
 
